@@ -72,6 +72,8 @@ namespace Chutzpah
 
         public string Proxy { get; protected set; }
 
+        public bool Snapshot { get; protected set; }
+
         private static void GuardNoOptionValue(KeyValuePair<string, string> option)
         {
             if (option.Value != null)
@@ -177,6 +179,10 @@ namespace Chutzpah
                     break;
                 case "/settingsfileenvironment":
                     AddSettingsFileEnvironment(option.Value);
+                    break;
+                case "/snapshot":
+                    GuardNoOptionValue(option);
+                    Snapshot = true;
                     break;
                 default:
                     var trimmedName = optionName.Trim('/');

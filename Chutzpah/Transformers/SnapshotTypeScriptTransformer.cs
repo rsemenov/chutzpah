@@ -69,13 +69,13 @@ namespace Chutzpah.Transformers
 
         public string GenerateSnapshotContent(TestFileSummary fileSummary)
         {
-            string json = "{ ";
+            string json = "{";
             foreach(var snapshot in fileSummary.TestSnapshots)
             {
-                json += $"{Environment.NewLine}'{snapshot.Key}': `{snapshot.Value}`,";
+                json += $"{Environment.NewLine}\"{snapshot.Key}\": `{snapshot.Value}`,";
             }
             json = json.TrimEnd(',');
-            json += $"{Environment.NewLine}}}";
+            json += $"{Environment.NewLine}}};{Environment.NewLine}";
             return $"export const snapshots = {json}";
         }
 

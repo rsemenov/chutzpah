@@ -377,8 +377,11 @@ namespace Chutzpah
                             break;
 
                         case "Snapshot":
-                            var jsSnapshot = jsonSerializer.Deserialize<JsSnapshot>(json);
-                            FireTestFinishedWithSnapshot(callback, currentTestFileContext, jsSnapshot, testIndex);
+                            if (testOptions.GenerateSnapshots)
+                            {
+                                var jsSnapshot = jsonSerializer.Deserialize<JsSnapshot>(json);
+                                FireTestFinishedWithSnapshot(callback, currentTestFileContext, jsSnapshot, testIndex);
+                            }
                             break;
 
                         case "Log":
