@@ -36,5 +36,8 @@ namespace Chutzpah.Wrappers
         void WriteAllText(string path, string text);
         void WriteAllText(string path, string text,Encoding encoding);
         bool IsPathRooted(string path);
+        string CombinePath(params string[] paths);
+        string GetFileNameWithoutExtension(string path);
+
     }
 }

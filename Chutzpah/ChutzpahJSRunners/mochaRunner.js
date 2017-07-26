@@ -112,6 +112,11 @@
                     return;
                 }
                 activeTestCase.timetaken = test.duration;
+
+                if (window.Snapshots) {
+                    log({ type: "Snapshot", snapshots: window.Snapshots, testCase: testCase });
+                }
+
                 log({ type: "TestDone", testCase: activeTestCase });
             });
             

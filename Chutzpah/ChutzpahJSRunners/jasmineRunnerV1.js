@@ -46,6 +46,12 @@
             }
         }
 
+        function logSnapshot(activeTestCase) {
+            if (window.Snapshots) {
+                log({ type: "Snapshot", testCase: activeTestCase, snapshots: window.Snapshots });
+            }
+        }
+
         function recordStackTrace(trace) {
             var stack = trace && trace.stack || null;
             if (stack) {
@@ -111,6 +117,8 @@
                         log({ type: 'Log', log: { message: result.toString() } });
                     }
                 }
+
+                logSnapshot(activeTestCase)
 
                 // Log test case when done. This will get picked up by phantom and streamed to chutzpah.
                 log({ type: "TestDone", testCase: activeTestCase });

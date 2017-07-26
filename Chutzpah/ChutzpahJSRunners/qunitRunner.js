@@ -136,12 +136,21 @@
             // Log test case when done. This will get picked up by phantom and streamed to chutzpah
             var timetaken = new Date().getTime() - testStartTime;
             activeTestCase.timetaken = timetaken;
+
+            logSnapshot(activeTestCase);
+
             log({ type: "TestDone", testCase: activeTestCase });
         };
 
         function logCoverage() {
             if (window._Chutzpah_covobj_name && window[window._Chutzpah_covobj_name]) {
                 log({ type: "CoverageObject", object: JSON.stringify(window[window._Chutzpah_covobj_name]) });
+            }
+        }
+
+        function logSnapshot(testCase) {
+            if (window.Snapshots) {
+                log({ type: "Snapshot", snapshots: window.Snapshots, testCase: testCase });
             }
         }
 

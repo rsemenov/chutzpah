@@ -70,6 +70,7 @@ chutzpah.runner = function (onInitialized, onPageLoaded, isFrameworkLoaded, onFr
             case 'Log':
             case 'Error':
             case 'CoverageObject':
+            case 'Snapshot':
                 console.log(wrap(eventObj.type) + json);
                 break;
                 

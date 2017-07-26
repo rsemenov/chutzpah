@@ -20,6 +20,7 @@ namespace Chutzpah.Transformers
                 new CoverageJsonTransformer(fileSystem),
                 new EmmaXmlTransformer(fileSystem),
                 new JacocoTransformer(fileSystem),
+                new SnapshotTypeScriptTransformer(fileSystem)
             };
         }
     }

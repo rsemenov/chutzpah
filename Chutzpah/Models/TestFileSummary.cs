@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Chutzpah.Models
 {
     /// <summary>
@@ -14,6 +16,11 @@ namespace Chutzpah.Models
         /// The file path the test file summary is for
         /// </summary>
         public string Path { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, string> TestSnapshots { get; set; } 
 
         /// <summary>
         /// If set, contains the coverage object created during coverage collection.

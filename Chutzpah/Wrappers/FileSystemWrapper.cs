@@ -172,6 +172,16 @@ namespace Chutzpah.Wrappers
             File.WriteAllText(path,contents);
         }
 
+        public string CombinePath(params string[] paths)
+        {
+            return Path.Combine(paths);
+        }
+
+        public string GetFileNameWithoutExtension(string path)
+        {
+            return Path.GetFileNameWithoutExtension(path);
+        }
+
         private T Retry<T>(Func<T> action, int maxCount = 3)
         {
             var count = 0;

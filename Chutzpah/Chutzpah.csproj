@@ -244,8 +244,10 @@
     <Compile Include="Coverage\ILineCoverageMapper.cs" />
     <Compile Include="Coverage\SourceMapDotNetLineCoverageMapper.cs" />
     <Compile Include="IUrlBuilder.cs" />
+    <Compile Include="Models\JS\JsSnapshot.cs" />
     <Compile Include="Server\ChutzpahServerFileProvider.cs" />
     <Compile Include="Transformers\JacocoTransformer.cs" />
+    <Compile Include="Transformers\SnapshotTypeScriptTransformer.cs" />
     <Compile Include="UrlBuilder.cs" />
     <Compile Include="FileProcessors\ISourceMapDiscoverer.cs" />
     <Compile Include="Extensions\VSTSExtensions.cs" />

@@ -25,11 +25,11 @@ namespace Chutzpah.Transformers
         public abstract string Description { get; }
         public abstract string Transform(TestCaseSummary testFileSummary);
 
-        private readonly IFileSystemWrapper fileSystem;
+        protected readonly IFileSystemWrapper FileSystem;
 
         public SummaryTransformer(IFileSystemWrapper fileSystem)
         {
-            this.fileSystem = fileSystem;
+            this.FileSystem = fileSystem;
         }
 
         public virtual void Transform(TestCaseSummary testFileSummary, string outFile)
@@ -44,7 +44,7 @@ namespace Chutzpah.Transformers
             }
 
             var result = Transform(testFileSummary);
-            fileSystem.WriteAllText(outFile, result, Encoding);
+            FileSystem.WriteAllText(outFile, result, Encoding);
         }
 
 		protected decimal ConvertMillisecondsToSeconds(long millis)

@@ -120,6 +120,34 @@ namespace Chutzpah
             }
         }
 
+        private void FireTestFinishedWithSnapshot(ITestMethodRunnerCallback callback, StreamingTestFileContext testFileContext, JsRunnerOutput jsRunnerOutput, int testIndex)
+        {
+            var jsSnapshot= jsRunnerOutput as JsSnapshot;
+            string testSnapshot = null;
+
+            if (jsSnapshot.Snapshots.ContainsKey(jsSnapshot.TestCase.ModuleName))
+            {
+                var moduleSnapshots = jsSnapshot.Snapshots[jsSnapshot.TestCase.ModuleName];
+
+                if (moduleSnapshots.ContainsKey(jsSnapshot.TestCase.TestName))
+                {
+                    testSnapshot = moduleSnapshots[jsSnapshot.TestCase.TestName];
+                }
+            }
+
+            if (testSnapshot != null)
+            {
+                if (testFileContext.TestFileSummary.TestSnapshots == null)
+                {
+                    testFileContext.TestFileSummary.TestSnapshots = new Dictionary<string, string>();
+                }
+
+                testFileContext.TestFileSummary.TestSnapshots.Add(jsSnapshot.TestCase.TestName, testSnapshot);
+
+                ChutzpahTracer.TraceInformation("Test Case Snapshot added for:'{0}'", jsSnapshot.TestCase.GetDisplayName());
+            }
+        }
+
         private void FireTestFinished(ITestMethodRunnerCallback callback, StreamingTestFileContext testFileContext, JsRunnerOutput jsRunnerOutput, int testIndex)
         {
 
@@ -346,6 +374,11 @@ namespace Chutzpah
 
                             testIndex++;
 
+                            break;
+
+                        case "Snapshot":
+                            var jsSnapshot = jsonSerializer.Deserialize<JsSnapshot>(json);
+                            FireTestFinishedWithSnapshot(callback, currentTestFileContext, jsSnapshot, testIndex);
                             break;
 
                         case "Log":

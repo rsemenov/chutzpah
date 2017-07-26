@@ -43,6 +43,12 @@
             }
         }
 
+        function logSnapshot(activeTestCase) {
+            if (window.Snapshots) {
+                log({ type: "Snapshot", testCase: activeTestCase, snapshots: window.Snapshots });
+            }
+        }
+
         function recordStackTrace(stack) {
             if (stack) {
                 // Truncate stack to 5 deep. 
@@ -126,6 +132,8 @@
                     activeTestCase.testResults.push(testResult);
        
                 }
+
+                logSnapshot(activeTestCase);
 
                 // Log test case when done. This will get picked up by phantom and streamed to chutzpah.
                 log({ type: "TestDone", testCase: activeTestCase });
